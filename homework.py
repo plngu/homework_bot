@@ -68,6 +68,8 @@ def check_response(response):
 
 def parse_status(homework):
     """Данные из конкретной домашней работы"""
+    if not len(homework):
+        return None
     try:
         homework_name = homework['homework_name']
         homework_status = homework['status']
@@ -107,16 +109,14 @@ def main():
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     current_timestamp = int(time.time())
 
-    get_api = get_api_answer(current_timestamp)
-    response = check_response(get_api)
-    init_verdict = parse_status(response[0])
+    init_verdict = None
     init_error = 'No errors'
 
     while True:
         try:
             get_api = get_api_answer(current_timestamp)
             response = check_response(get_api)
-            verdict = parse_status(response[0])
+            verdict = parse_status(response)
             if verdict != init_verdict:
                 send_message(bot, verdict)
                 logging.info(verdict)
