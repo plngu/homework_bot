@@ -115,7 +115,7 @@ def main():
         try:
             get_api = get_api_answer(current_timestamp)
             response = check_response(get_api)
-            verdict = parse_status(response)
+            verdict = parse_status(response[0]) if response else None
             if verdict != init_verdict:
                 send_message(bot, verdict)
                 logging.info(verdict)
