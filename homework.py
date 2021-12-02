@@ -28,7 +28,7 @@ HOMEWORK_STATUSES = {
 
 
 def send_message(bot, message):
-    """Отправка сообщения"""
+    """Отправка сообщения."""
     try:
         bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
         logging.info(message)
@@ -37,7 +37,7 @@ def send_message(bot, message):
 
 
 def get_api_answer(current_timestamp):
-    """Получаем ответ от API"""
+    """Получаем ответ от API."""
     timestamp = current_timestamp or int(time.time())
     params = {'from_date': timestamp}
     try:
@@ -56,7 +56,7 @@ def get_api_answer(current_timestamp):
 
 
 def check_response(response):
-    """Проверка корректности API-ответа"""
+    """Проверка корректности API-ответа."""
     try:
         data = response['homeworks']
     except KeyError as error:
@@ -67,15 +67,14 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Данные из конкретной домашней работы"""
+    """Данные из конкретной домашней работы."""
     if not len(homework):
         return None
     try:
         homework_name = homework['homework_name']
         homework_status = homework['status']
     except TypeError as error:
-        logging.error(error,
-                      f'Отсутствие ожидаемых ключей в ответе API')
+        logging.error(error, 'Отсутствие ожидаемых ключей в ответе API')
         return None
     try:
         verdict = HOMEWORK_STATUSES[homework_status]
@@ -88,7 +87,7 @@ def parse_status(homework):
 
 
 def check_tokens():
-    """Проверка наличия токеноу"""
+    """Проверка наличия токенов."""
     tokens = {'TELEGRAM_CHAT_ID': TELEGRAM_CHAT_ID,
               'TELEGRAM_TOKEN': TELEGRAM_TOKEN,
               'PRACTICUM_TOKEN': PRACTICUM_TOKEN}
