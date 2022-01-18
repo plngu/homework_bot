@@ -126,7 +126,7 @@ def main():
     # основной цикл
     while True:
         try:
-            get_api = get_api_answer(current_timestampf)
+            get_api = get_api_answer(current_timestamp)
             response = check_response(get_api)
             verdict = parse_status(response[0]) if response else None
             if verdict != init_verdict and verdict is not None:
