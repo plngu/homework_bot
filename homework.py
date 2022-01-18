@@ -123,6 +123,7 @@ def main():
     init_verdict = None
     init_error = 'No errors'
 
+    # основной цикл
     while True:
         try:
             get_api = get_api_answer(current_timestamp)
